@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en" xmlns:th="http://www.ultraq.net.nz/thymeleaf" layout:decorate="~{/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+<article layout:fragment="content" class="container body-content">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <br/><br/>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+
+        <div th:if="${param.error}">
+          <div class="alert alert-danger">Invalid Email or Password</div>
+        </div>
+        <div th:if="${param.logout}">
+          <div class="alert alert-success">You have been logged out.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Login Form</h2>
+          </div>
+          <div class="card-body">
+            <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+              <div class="form-group mb-3">
+                <label class="control-label">Email</label>
+                <input type="text" id="username" name="username" class="form-control"
+                       placeholder="Enter email address" />
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="control-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control"
+                       placeholder="Enter password" />
+              </div>
+              <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en" xmlns:th="http://www.ultraq.net.nz/thymeleaf" layout:decorate="~{/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Nhanvien</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+<article layout:fragment="content" class="container body-content">
+    <h1>Edit Nhanvien</h1>
+    <br/>
+    <form class="form" action="#" th:action="@{/save}" th:object="${nhanvien}" method="post">
+        <div class="form-group">
+            <label>Ma Nhan Vien:</label>
+            <input class="form-control" type="text" th:field="*{ma_nv}" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Ten Nhan Vien:</label>
+            <input class="form-control" type="text" th:field="*{ten_nv}" />
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="gioi_tinh">Gioi Tinh:</label>
+            <select class="custom-select mr-sm-2" id="gioi_tinh" th:field="*{gioi_tinh}">
+                <option value="">--Giới Tinh--</option>
+                <option th:value="NAM" th:text="NAM"></option>
+                <option th:value="NU" th:text="NỮ"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Noi Sinh:</label>
+            <input class="form-control" type="text" th:field="*{noi_sinh}" />
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="phongban">Phong Ban:</label>
+            <select class="custom-select mr-sm-2" id="phongban" th:field="*{phong_ban.ma_phong}">
+                <option value="">--Phòng Ban--</option>
+                <option th:each="pb : ${pbs}" th:value="${pb.ma_phong}" th:text="${pb.ten_phong}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Luong:</label>
+            <input class="form-control" type="number" th:field="*{luong}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</article>
+</body>
+</html>

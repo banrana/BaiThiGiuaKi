@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-D0m+PaKw5o/sl8jz2E4e/4lO+jEuxhgW6VIk5qrptwoCwq4L1l4S+nW6N8XvU8oM"
+          crossorigin="anonymous">
+</head>
+<body>
+<article layout:fragment="content" class="container body-content">
+    <div align="center">
+        <h1>Danh Sách Nhân Viên</h1>
+        <a href="/add" class="btn btn-primary">New Nhan Vien</a>
+        <br/><br/>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Ma Nhan Vien</th>
+                    <th scope="col">Ten Nhan Vien</th>
+                    <th scope="col">Gioi Tinh</th>
+                    <th scope="col">Noi Sinh</th>
+                    <th scope="col">Phong Ban</th>
+                    <th scope="col">Luong</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="nhanvien : ${listNhanvien}">
+                    <td scope="row" th:text="${nhanvien.ma_nv}"></td>
+                    <td th:text="${nhanvien.ten_nv}"></td>
+                    <td>
+                        <img th:if="${nhanvien.gioi_tinh == 'NAM'}" width="30" height="30" th:src="@{/images/male.png}">
+                        <img th:if="${nhanvien.gioi_tinh == 'NU'}" width="30" height="30" th:src="@{/images/female.png}">
+                    </td>
+                    <td th:text="${nhanvien.noi_sinh}"></td>
+                    <td th:text="${nhanvien.phong_ban.ten_phong}"></td>
+                    <td th:text="${nhanvien.luong}"></td>
+                    <td>
+                        <a th:href="@{'/edit/'+${nhanvien.ma_nv}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a th:href="@{'/delete/'+${nhanvien.ma_nv}}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>
+</body>
+</html>
